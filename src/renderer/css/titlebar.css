@@ -1,0 +1,445 @@
+/* 自定义标题栏样式 */
+.titlebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 32px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    -webkit-app-region: no-drag;
+}
+
+.titlebar-drag-region {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    -webkit-app-region: drag;
+}
+
+.titlebar-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.titlebar-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.app-name {
+    user-select: none;
+}
+
+.titlebar-controls {
+    display: flex;
+    height: 100%;
+    -webkit-app-region: no-drag;
+}
+
+.titlebar-button {
+    width: 46px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+    -webkit-app-region: no-drag;
+}
+
+.titlebar-button:hover {
+    background-color: var(--bg-hover);
+}
+
+.titlebar-button:active {
+    background-color: var(--bg-tertiary);
+}
+
+.titlebar-button.close:hover {
+    background-color: #e81123;
+    color: white;
+}
+
+.titlebar-button.close:active {
+    background-color: #c50e1f;
+}
+
+.titlebar-button svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 1;
+    stroke-linecap: round;
+}
+
+/* 主题切换按钮样式 */
+.titlebar-button.theme-toggle {
+    width: 40px;
+    position: relative;
+}
+
+.titlebar-button.theme-toggle:hover {
+    background-color: var(--bg-hover);
+}
+
+.titlebar-button.theme-toggle .theme-icon-light,
+.titlebar-button.theme-toggle .theme-icon-dark {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* 深色模式时的样式调整 */
+.dark-theme .titlebar-button.theme-toggle .theme-icon-light {
+    color: #ffd700;
+}
+
+.dark-theme .titlebar-button.theme-toggle .theme-icon-dark {
+    color: #87ceeb;
+}
+
+/* 透明度按钮样式 */
+.titlebar-button.opacity-toggle {
+    width: 40px;
+    position: relative;
+}
+
+.titlebar-button.opacity-toggle:hover {
+    background-color: var(--bg-hover);
+}
+
+.titlebar-button.opacity-toggle.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.titlebar-button.opacity-toggle.active:hover {
+    background-color: var(--accent-hover);
+}
+
+/* 置顶按钮样式 */
+.titlebar-button.pin-toggle {
+    width: 40px;
+    position: relative;
+}
+
+.titlebar-button.pin-toggle:hover {
+    background-color: var(--bg-hover);
+}
+
+.titlebar-button.pin-toggle.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.titlebar-button.pin-toggle.active:hover {
+    background-color: var(--accent-hover);
+}
+
+/* 设置按钮样式 */
+.titlebar-button.settings-toggle {
+    width: 40px;
+    position: relative;
+}
+
+.titlebar-button.settings-toggle:hover {
+    background-color: var(--bg-hover);
+}
+
+.titlebar-button.settings-toggle:active {
+    background-color: var(--bg-tertiary);
+}
+
+/* 控制按钮通用激活状态 */
+.titlebar-button.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.titlebar-button.active:hover {
+    background-color: var(--accent-hover);
+}
+
+/* 深色模式下的控制按钮样式 */
+.dark-theme .titlebar-button.opacity-toggle .theme-icon-light {
+    color: #87ceeb;
+}
+
+.dark-theme .titlebar-button.pin-toggle.active {
+    background-color: var(--accent-color);
+}
+
+.dark-theme .titlebar-button.opacity-toggle.active {
+    background-color: var(--accent-color);
+}
+
+/* 透明度调节通知样式 */
+.opacity-notification {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+    user-select: none;
+}
+
+.opacity-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.opacity-notification.fade-out {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+/* 深色模式下的通知样式 */
+.dark-theme .opacity-notification {
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 最大化/还原按钮状态切换 */
+.titlebar-button.maximize.is-maximized svg {
+    display: none;
+}
+
+.titlebar-button.maximize.is-maximized::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border: 1px solid currentColor;
+    position: relative;
+    display: block;
+}
+
+.titlebar-button.maximize.is-maximized::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border: 1px solid currentColor;
+    position: absolute;
+    top: 8px;
+    left: 18px;
+    background-color: var(--bg-secondary);
+}
+
+/* macOS 样式标题栏 */
+.titlebar.macos {
+    height: 22px;
+    padding-left: 70px; /* 为红绿灯按钮留空间 */
+}
+
+.titlebar.macos .titlebar-controls {
+    position: absolute;
+    left: 12px;
+    top: 0;
+    height: 22px;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.titlebar.macos .titlebar-button {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: none;
+    color: transparent;
+    min-width: unset;
+}
+
+.titlebar.macos .titlebar-button.close {
+    background-color: #ff5f56;
+}
+
+.titlebar.macos .titlebar-button.minimize {
+    background-color: #ffbd2e;
+}
+
+.titlebar.macos .titlebar-button.maximize {
+    background-color: #27ca3f;
+}
+
+.titlebar.macos .titlebar-button:hover {
+    opacity: 0.8;
+}
+
+.titlebar.macos .titlebar-button svg {
+    display: none;
+}
+
+/* 深色主题适配 */
+@media (prefers-color-scheme: dark) {
+    .titlebar-button.close:hover {
+        background-color: #e81123;
+        color: white;
+    }
+    
+    .titlebar-button.close:active {
+        background-color: #c50e1f;
+    }
+}
+
+/* 焦点状态 */
+.titlebar-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+}
+
+.titlebar-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* 禁用状态 */
+.titlebar-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.titlebar-button:disabled:hover {
+    background-color: transparent;
+}
+
+/* 标题栏在全屏时隐藏 */
+.fullscreen .titlebar {
+    display: none;
+}
+
+/* 标题栏阴影效果 */
+.titlebar::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    opacity: 0.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .titlebar-title {
+        padding: 0 8px;
+        font-size: 12px;
+    }
+    
+    .titlebar-icon {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .titlebar-button {
+        width: 40px;
+    }
+}
+
+/* 高DPI屏幕适配 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .titlebar-icon {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* 动画效果 */
+.titlebar-title {
+    transition: opacity 0.2s ease;
+}
+
+.titlebar.loading .titlebar-title {
+    opacity: 0.6;
+}
+
+/* 可访问性 */
+.titlebar-button[aria-label]::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 1001;
+}
+
+.titlebar-button:hover[aria-label]::after {
+    opacity: 1;
+}
+
+/* 拖拽区域指示 */
+.titlebar-drag-region::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+/* 自定义滚动条在标题栏区域的样式 */
+.titlebar ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.titlebar ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.titlebar ::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 2px;
+}
+
+/* 标题栏内文本选择禁用 */
+.titlebar * {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 平台特定样式 */
+.platform-win32 .titlebar {
+    height: 32px;
+}
+
+.platform-darwin .titlebar {
+    height: 28px;
+    padding-left: 70px;
+}
+
+.platform-linux .titlebar {
+    height: 32px;
+}

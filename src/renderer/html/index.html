@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron Go App</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/titlebar.css">
+</head>
+<body>
+    <!-- 自定义标题栏 -->
+    <div class="titlebar">
+        <div class="titlebar-drag-region">
+            <div class="titlebar-title">
+                <img src="../../assets/icon.png" alt="图标" class="titlebar-icon">
+                <span class="app-name">Electron Go App</span>
+            </div>
+        </div>
+        <div class="titlebar-controls">
+            <button class="titlebar-button theme-toggle" id="themeToggleBtn" title="切换主题">
+                <svg width="12" height="12" viewBox="0 0 12 12" class="theme-icon-light">
+                    <circle cx="6" cy="6" r="3" fill="currentColor"/>
+                    <path d="M6 0v1.5M6 10.5v1.5M0 6h1.5M10.5 6h1.5M1.8 1.8l1.1 1.1M9.1 9.1l1.1 1.1M10.2 1.8l-1.1 1.1M2.9 9.1l-1.1 1.1" stroke="currentColor" stroke-width="0.8"/>
+                </svg>
+                <svg width="12" height="12" viewBox="0 0 12 12" class="theme-icon-dark" style="display: none;">
+                    <path d="M7.2 1.2c-1.8 0-3.4 0.7-4.6 1.9C1.4 4.3 0.7 5.9 0.7 7.7c0 1.8 0.7 3.4 1.9 4.6s2.8 1.9 4.6 1.9c1 0 1.8-0.2 2.6-0.6-0.6 0.2-1.3 0.4-2 0.4-2.6 0-4.8-2.2-4.8-4.8s2.2-4.8 4.8-4.8c0.7 0 1.4 0.1 2 0.4C9 1.4 8.1 1.2 7.2 1.2z" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="titlebar-button opacity-toggle" id="opacityBtn" title="透明度开关">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                    <circle cx="6" cy="6" r="2" fill="currentColor" opacity="0.6"/>
+                </svg>
+            </button>
+            <button class="titlebar-button pin-toggle" id="pinBtn" title="置顶显示">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M4,2 L8,2 L8,4 L9,4 L9,5 L8,5 L8,7.5 L6.5,7.5 L6.5,10 L5.5,10 L5.5,7.5 L4,7.5 L4,5 L3,5 L3,4 L4,4 Z" stroke="currentColor" stroke-width="0.6" fill="currentColor"/>
+                </svg>
+            </button>
+            <button class="titlebar-button settings-toggle" id="settingsBtn" title="设置">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M6 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.2 6a1.8 1.8 0 1 1 3.6 0 1.8 1.8 0 0 1-3.6 0z"/>
+                    <path d="M7.35 1.07c-.42-1.43-2.28-1.43-2.7 0l-.08.25a.7.7 0 0 1-1 .42l-.23-.13c-1.31-.71-2.74.73-2.03 2.03l.13.23a.7.7 0 0 1-.42 1l-.25.08c-1.43.42-1.43 2.28 0 2.7l.25.08a.7.7 0 0 1 .42 1l-.13.23c-.71 1.31.72 2.74 2.03 2.03l.23-.13a.7.7 0 0 1 1 .42l.08.25c.42 1.43 2.28 1.43 2.7 0l.08-.25a.7.7 0 0 1 1-.42l.23.13c1.31.71 2.74-.72 2.03-2.03l-.13-.23a.7.7 0 0 1 .42-1l.25-.08c1.43-.42 1.43-2.28 0-2.7l-.25-.08a.7.7 0 0 1-.42-1l.13-.23c.71-1.31-.72-2.74-2.03-2.03l-.23.13a.7.7 0 0 1-1-.42l-.08-.25z"/>
+                </svg>
+            </button>
+            <button class="titlebar-button minimize" id="minimizeBtn" title="最小化">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M0 6h12" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+            <button class="titlebar-button maximize" id="maximizeBtn" title="最大化">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M1 1h10v10H1z" fill="none" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+            <button class="titlebar-button close" id="closeBtn" title="关闭">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="nav-item active" data-page="home">主页</a></li>
+                    <li><a href="#" class="nav-item" data-page="about">关于</a></li>
+                </ul>
+            </nav>
+
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="content">
+            <!-- 主页面 -->
+            <div class="page active" id="homePage">
+                <div class="page-header">
+                    <h1>欢迎使用 Electron Go App</h1>
+                    <p class="page-subtitle">基于 Electron 和 Go 的桌面应用开发框架</p>
+                </div>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <h3>快速开始</h3>
+                        <p>开箱即用的桌面应用开发框架，整合了 Go 后端和 Electron 前端。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>高性能</h3>
+                        <p>Go 提供高性能的后端 API 服务，Electron 提供跨平台的桌面界面。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">🛠️</div>
+                        <h3>完整工具链</h3>
+                        <p>包含完整的开发、构建、打包和部署工具链。</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">📱</div>
+                        <h3>系统集成</h3>
+                        <p>支持全局快捷键等系统集成功能。</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 关于页面 -->
+            <div class="page" id="aboutPage">
+                <div class="page-header">
+                    <h1>关于应用</h1>
+                    <p class="page-subtitle">应用信息和技术栈</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-card">
+                        <h3>Electron Go Framework</h3>
+                        <p>版本: 1.0.0</p>
+                        <p>基于 sikongai 项目架构的通用桌面应用开发框架</p>
+                    </div>
+                    
+                    <div class="tech-stack">
+                        <h3>技术栈</h3>
+                        <div class="tech-list">
+                            <div class="tech-item">
+                                <strong>后端:</strong> Go + Gin Framework
+                            </div>
+                            <div class="tech-item">
+                                <strong>前端:</strong> Electron + HTML/CSS/JavaScript
+                            </div>
+                            <div class="tech-item">
+                                <strong>构建:</strong> Electron Builder + Go Build
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 状态栏 -->
+    <div class="statusbar">
+        <div class="status-left">
+            <span class="server-status-indicator" id="statusBarServer">
+                <span class="status-dot"></span>
+                <span class="status-text">服务器: 检查中</span>
+            </span>
+        </div>
+        <div class="status-right">
+            <span id="currentTime"></span>
+        </div>
+    </div>
+
+    <!-- 脚本文件 -->
+    <script src="../js/global-settings.js"></script>
+    <script src="../js/titlebar.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

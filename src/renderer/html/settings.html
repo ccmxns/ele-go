@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置 - Electron Go App</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/titlebar.css">
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body class="settings-body">
+    <!-- 自定义标题栏 -->
+    <div class="titlebar">
+        <div class="titlebar-drag-region">
+            <div class="titlebar-title">
+                <img src="../../assets/icon.png" alt="图标" class="titlebar-icon">
+                <span class="app-name">设置</span>
+            </div>
+        </div>
+        <div class="titlebar-controls">
+            <button class="titlebar-button minimize" id="minimizeBtn" title="最小化">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M0 6h12" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+            <button class="titlebar-button close" id="closeBtn" title="关闭">
+                <svg width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- 设置内容 -->
+    <div class="settings-container">
+        <!-- 设置侧边栏 -->
+        <aside class="settings-sidebar">
+            <nav class="settings-nav">
+                <ul>
+                    <li><a href="#" class="settings-nav-item active" data-section="general">常规</a></li>
+
+                    <li><a href="#" class="settings-nav-item" data-section="hotkeys">快捷键</a></li>
+                    <li><a href="#" class="settings-nav-item" data-section="system">系统</a></li>
+                    <li><a href="#" class="settings-nav-item" data-section="server">服务器</a></li>
+                    <li><a href="#" class="settings-nav-item" data-section="about">关于</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 设置主内容 -->
+        <main class="settings-main">
+            <!-- 常规设置 -->
+            <section class="settings-section active" id="generalSection">
+                <h2>常规设置</h2>
+                
+
+
+                <div class="setting-group">
+                    <h3>窗口设置</h3>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" id="alwaysOnTopCheckbox">
+                            <span class="checkmark"></span>
+                            窗口置顶
+                        </label>
+                        <p class="setting-description">保持窗口在其他窗口之上</p>
+                    </div>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" id="launchOnStartupCheckbox">
+                            <span class="checkmark"></span>
+                            开机自启动
+                        </label>
+                        <p class="setting-description">当计算机启动时自动运行应用</p>
+                    </div>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" id="silentStartupCheckbox">
+                            <span class="checkmark"></span>
+                            静默启动
+                        </label>
+                        <p class="setting-description">启动时只在托盘显示图标，不显示主窗口</p>
+                    </div>
+                    
+
+                </div>
+            </section>
+
+
+            <!-- 快捷键设置 -->
+            <section class="settings-section" id="hotkeysSection">
+                <h2>快捷键设置</h2>
+                
+                <div class="setting-group">
+                    <h3>全局快捷键</h3>
+                    <div class="setting-item">
+                        <label class="setting-label">显示/隐藏窗口</label>
+                        <input type="text" id="hotkeyToggleInput" class="setting-input hotkey-input" placeholder="点击设置快捷键" readonly>
+                        <button class="btn btn-secondary" id="clearHotkeyToggle">清除</button>
+                        <p class="setting-description">切换主窗口的显示和隐藏状态</p>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label class="setting-label">显示窗口</label>
+                        <input type="text" id="hotkeyShowInput" class="setting-input hotkey-input" placeholder="点击设置快捷键" readonly>
+                        <button class="btn btn-secondary" id="clearHotkeyShow">清除</button>
+                        <p class="setting-description">显示主窗口</p>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label class="setting-label">隐藏窗口</label>
+                        <input type="text" id="hotkeyHideInput" class="setting-input hotkey-input" placeholder="点击设置快捷键" readonly>
+                        <button class="btn btn-secondary" id="clearHotkeyHide">清除</button>
+                        <p class="setting-description">隐藏主窗口</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 系统设置 -->
+            <section class="settings-section" id="systemSection">
+                <h2>系统设置</h2>
+                
+                <div class="setting-group">
+                    <h3>通知设置</h3>
+                    <div class="setting-item">
+                        <label class="setting-label">
+                            <input type="checkbox" id="notificationsCheckbox" checked>
+                            <span class="checkmark"></span>
+                            启用通知
+                        </label>
+                        <p class="setting-description">允许应用显示系统通知</p>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>数据设置</h3>
+                    <div class="setting-item">
+                        <button class="btn btn-secondary" id="clearCacheBtn">清除缓存</button>
+                        <p class="setting-description">清除应用的缓存数据</p>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <button class="btn btn-secondary" id="resetSettingsBtn">重置设置</button>
+                        <p class="setting-description">将所有设置恢复为默认值</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 服务器设置 -->
+            <section class="settings-section" id="serverSection">
+                <h2>服务器设置</h2>
+                
+                <div class="setting-group">
+                    <h3>连接设置</h3>
+                    <div class="setting-item">
+                        <label class="setting-label">服务器端口</label>
+                        <input type="number" id="serverPortInput" class="setting-input" value="10300" min="1024" max="65535">
+                        <p class="setting-description">Go 服务器监听端口</p>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label class="setting-label">请求超时</label>
+                        <input type="number" id="timeoutInput" class="setting-input" value="30" min="5" max="300">
+                        <span class="input-suffix">秒</span>
+                        <p class="setting-description">API 请求超时时间</p>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>服务器管理</h3>
+                    <div class="setting-item">
+                        <div class="server-status-display">
+                            <span class="status-indicator" id="serverStatusDisplay">
+                                <span class="status-dot"></span>
+                                <span class="status-text">检查中...</span>
+                            </span>
+                        </div>
+                        <div class="server-actions">
+                            <button class="btn btn-secondary" id="checkServerBtn">检查状态</button>
+                            <button class="btn btn-primary" id="restartServerBtn">重启服务器</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 关于设置 -->
+            <section class="settings-section" id="aboutSection">
+                <h2>关于应用</h2>
+                
+                <div class="about-info">
+                    <div class="app-logo">
+                        <img src="../../assets/icon.png" alt="应用图标">
+                    </div>
+                    <h3>Electron Go Framework</h3>
+                    <p class="version">版本 1.0.0</p>
+                    <p class="description">基于 Electron 和 Go 的桌面应用开发框架</p>
+                    
+                    <div class="tech-info">
+                        <h4>技术栈</h4>
+                        <ul>
+                            <li>后端: Go + Gin Framework</li>
+                            <li>前端: Electron + HTML/CSS/JavaScript</li>
+                            <li>构建: Electron Builder</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="links">
+                        <button class="btn btn-link" id="githubBtn">GitHub</button>
+                        <button class="btn btn-link" id="docsBtn">文档</button>
+                        <button class="btn btn-link" id="licenseBtn">许可证</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 设置底部操作栏 -->
+    <div class="settings-footer">
+        <div class="footer-left">
+            <span class="save-status" id="saveStatus">设置已自动保存</span>
+        </div>
+        <div class="footer-right">
+            <button class="btn btn-secondary" id="cancelBtn">取消</button>
+            <button class="btn btn-primary" id="saveBtn">保存设置</button>
+        </div>
+    </div>
+
+    <!-- 脚本文件 -->
+    <script src="../js/global-settings.js"></script>
+    <script src="../js/settings.js"></script>
+</body>
+</html>

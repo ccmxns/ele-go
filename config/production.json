@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "Electron Go App",
+    "version": "1.0.0",
+    "description": "基于 Electron 和 Go 的桌面应用开发框架",
+    "author": "开发者"
+  },
+  "server": {
+    "host": "localhost",
+    "port": 1313,
+    "mode": "release",
+    "allowOrigins": ["http://localhost", "https://localhost"],
+    "readTimeout": 30,
+    "writeTimeout": 30,
+    "autoRestart": false
+  },
+  "log": {
+    "level": "info",
+    "format": "json",
+    "enableConsole": false,
+    "enableFile": true,
+    "maxFileSize": "10MB",
+    "maxFiles": 5
+  },
+  "features": {
+    "autoUpdate": true,
+    "crashReporting": true,
+    "analytics": false,
+    "devTools": false
+  },
+  "client": {
+    "enableDevTools": false,
+    "openDevToolsOnStart": false,
+    "enableHotReload": false,
+    "debugMode": false
+  },
+  "security": {
+    "enableCSP": true,
+    "allowUnsafeEval": false,
+    "allowUnsafeInline": false
+  }
+}

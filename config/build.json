@@ -1,0 +1,109 @@
+{
+  "build": {
+    "appId": "com.example.electrongoapp",
+    "productName": "Electron Go App",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "!**/*.map",
+      "!**/node_modules/.cache/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../server/app-server${/*}",
+        "to": "server",
+        "filter": ["app-server*"]
+      }
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "server/**/*"
+    ]
+  },
+  "platforms": {
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "src/assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["universal"]
+        }
+      ],
+      "icon": "src/assets/icon.png",
+      "category": "public.app-category.developer-tools",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "src/assets/icon.png",
+      "category": "Development"
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Electron Go App",
+    "include": "scripts/installer.nsh"
+  },
+  "dmg": {
+    "title": "Electron Go App",
+    "icon": "src/assets/icon.png",
+    "backgroundColor": "#ffffff",
+    "window": {
+      "width": 600,
+      "height": 400
+    },
+    "contents": [
+      {
+        "x": 150,
+        "y": 150,
+        "type": "file"
+      },
+      {
+        "x": 450,
+        "y": 150,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  },
+  "publish": {
+    "provider": "github",
+    "owner": "your-username",
+    "repo": "your-repo-name",
+    "private": true
+  }
+}

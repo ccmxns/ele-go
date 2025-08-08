@@ -1,0 +1,95 @@
+{
+  "name": "electron-go-framework",
+  "version": "1.0.0",
+  "description": "基于 Electron + Go 的桌面应用开发框架",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node scripts/dev.js",
+    "dev": "node scripts/dev.js",
+    "server": "node scripts/dev.js --server-only",
+    "client": "node scripts/dev.js --client-only",
+    "build": "node scripts/build.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "electron-dev": "electron src/main.js --dev",
+    "electron-start": "electron src/main.js",
+    "clean": "node scripts/clean.js",
+    "change-port": "node scripts/change-port.js",
+    "postinstall": "cd server && go mod tidy"
+  },
+  "keywords": [
+    "electron",
+    "go",
+    "desktop",
+    "framework",
+    "cross-platform"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "electron-window-state": "^5.0.3"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.13.3",
+    "rimraf": "^5.0.0"
+  },
+  "build": {
+    "appId": "com.example.electrongoapp",
+    "productName": "Electron Go App",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "!**/*.map"
+    ],
+    "extraResources": [
+      {
+        "from": "server/app-server.exe",
+        "to": "server/app-server.exe",
+        "filter": [
+          "app-server.exe"
+        ]
+      },
+      {
+        "from": "server/app-server",
+        "to": "server/app-server",
+        "filter": [
+          "app-server"
+        ]
+      }
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "server/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "src/assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "src/assets/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "src/assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
